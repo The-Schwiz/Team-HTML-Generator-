@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "10-OOP",
+			"path": ".."
+		},
+		{
+			"name": "BootCamp UofT",
+			"path": "../../../../BootCamp UofT"
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5504,
+		"liveServer.settings.multiRootWorkspaceName": "10-OOP"
+	}
+}
