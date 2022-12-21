@@ -4,6 +4,7 @@ const Engineer = require("./Assets/lib/engineer.js");
 const Intern = require("./Assets/lib/intern");
 const Employee = require("./Assets/lib/employee");
 const Manager = require("./Assets/lib/manager");
+const { writeHTMLFile } = require("./Assets/lib/generatehtml");
 
 // main manager function 
 //inside function you have helper functions to add team members
@@ -36,12 +37,14 @@ const main = async () => {
                 break;
             case 'Engineer':
                 // TODO: add engineer
-                employees.push('engineer');
+                const engineer = await Engineer.createEngineer();
+                employees.push(engineer);
                 console.log('add engineer');
                 break;
             case 'Intern':
                 // TODO: add intern
-                employees.push('intern');
+                const intern = await Intern.createIntern();
+                employees.push(intern);
                 console.log('add intern');
                 break;
             default:
@@ -56,6 +59,7 @@ const main = async () => {
     // call generate html function from lib folder
     console.log(employees);
     // TODO: generate html
+    writeHTMLFile(employees);
 };
 main();
     // inquirer
@@ -200,6 +204,6 @@ main();
 //                         </ul>
 //                     </div>
 //                 </card>
-`
-//     };
+// `
+// //     };
 

@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 function writeHTMLFile (employees){
     const htmlStr = generateHTMLStr(employees);
     fs.writeFile('index.html', htmlStr, (err) =>
@@ -9,27 +11,46 @@ function writeHTMLFile (employees){
 // return total html string
 function generateHTMLStr(employees){
     let htmlStr = `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Team Profile Generator</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4">My Team</h1>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Team Profile Generator</title>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            <link rel="stylesheet" href="style.css">
+        </head>
+        <body>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">My Team</h1>
+                </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="row">`;
-    
-    for (let i = 0; i < employees.length; i++){
-        
+            <div class="container">
+                <div class="row">`;    
+    for (let i = 0; i < employees.length; i++) {
+        const employee = employees[i];
+        console.log(employee.getRole());
+
+        switch (employee.getRole()){
+            case 'Manager':
+                htmlStr += generateManagerHTMLStr(employee);
+                break;
+            case 'Engineer':
+                htmlStr += generateEngineerHTMLStr(employee);
+                break;
+            case 'Intern':
+                htmlStr += generateInternHTMLStr(employee);
+                break;
+            default:
+                throw new Error('Not an Employee Object');
+        }
     }
+    htmlStr += `</div>
+                </div>
+            </body>
+        </html>`
+    return htmlStr;
 }
 
 function generateManagerHTMLStr(manager){
@@ -40,9 +61,9 @@ function generateManagerHTMLStr(manager){
     </div>
     <div class="card-body">
         <ul class="list-group">
-            <li class="list-group-item">ID:${managerId} </li>
-            <li class="list-group-item">Email: ${managerEmail} </li>
-            <li class="list-group-item">Office Number: ${managerNumber} </li>
+            <li class="list-group-item">ID:${manager.id} </li>
+            <li class="list-group-item">Email: ${manager.email} </li>
+            <li class="list-group-item">Office Number: ${manager.officeNumber} </li>
         </ul>
     </div>
 </card>`
@@ -57,9 +78,9 @@ function generateInternHTMLStr(intern){
     </div>
     <div class="card-body">
         <ul class="list-group">
-            <li class="list-group-item">ID:${internId} </li>
-            <li class="list-group-item">Email: ${internEmail} </li>
-            <li class="list-group-item">School: ${internSchool} </li>
+            <li class="list-group-item">ID:${intern.id} </li>
+            <li class="list-group-item">Email: ${intern.email} </li>
+            <li class="list-group-item">School: ${intern.school} </li>
         </ul>
     </div>
 </card>`
@@ -74,12 +95,15 @@ function generateEngineerHTMLStr(engineer){
     </div>
     <div class="card-body">
         <ul class="list-group">
-            <li class="list-group-item">ID:${engineerId} </li>
-            <li class="list-group-item">Email: ${managerEmail} </li>
-            <li class="list-group-item">Office Number: ${engineerGithub} </li>
+            <li class="list-group-item">ID:${engineer.id} </li>
+            <li class="list-group-item">Email: ${engineer.email} </li>
+            <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.github}">${engineer.github}</a></li>
         </ul>
     </div>
 </card>`
 }
+
+
+module.exports = { writeHTMLFile };
 
 //can make helper functions for dealing with each kind of employee object (manager, engineer, intern)

@@ -34,7 +34,7 @@ class Engineer extends Employee {
             },
             {
                 type: 'input',
-                message: `what is ${this.name}'s GitHub user name?`,
+                message: `What is ${this.name}'s GitHub user name?`,
                 name: 'engineerGithub',
             },
         ]);
@@ -43,7 +43,7 @@ class Engineer extends Employee {
             answers.engineerName,
             answers.engineerId,
             answers.engineerEmail,
-            answers.engineerSchool,
+            answers.engineerGithub,
         );
         return engineer;
     }

@@ -7,6 +7,7 @@ class Manager extends Employee {
         super(name, id, email);
         this.officeNumber = officeNumber;
     }
+    
     getRole() {
         return "Manager";
     }
@@ -31,7 +32,7 @@ class Manager extends Employee {
             },
             {
                 type: 'input',
-                message: `what is ${this.name}'s office number?`,
+                message: `What is ${this.name}'s office number?`,
                 name: 'managerNumber',
             },
         ]);
