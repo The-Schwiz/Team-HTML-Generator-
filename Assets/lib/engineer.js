@@ -1,5 +1,4 @@
 const inquirer = require("inquirer");
-const fs = require("fs");
 const Employee = require("./employee");
 
 class Engineer extends Employee {

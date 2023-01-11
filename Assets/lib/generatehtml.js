@@ -5,7 +5,6 @@ function writeHTMLFile (employees){
     fs.writeFile('index.html', htmlStr, (err) =>
     err ? console.log(err) : console.log('Successfully created index.html!')
     );
-
 }
 
 // return total html string
@@ -18,11 +17,11 @@ function generateHTMLStr(employees){
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Team Profile Generator</title>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-            <link rel="stylesheet" href="style.css">
+            <link rel="stylesheet" href="./Assets/style.css">
         </head>
         <body>
             <div class="jumbotron jumbotron-fluid">
-                <div class="container">
+                <div class="container main-header">
                     <h1 class="display-4">My Team</h1>
                 </div>
             </div>
@@ -30,7 +29,6 @@ function generateHTMLStr(employees){
                 <div class="row">`;    
     for (let i = 0; i < employees.length; i++) {
         const employee = employees[i];
-        console.log(employee.getRole());
 
         switch (employee.getRole()){
             case 'Manager':
@@ -43,7 +41,7 @@ function generateHTMLStr(employees){
                 htmlStr += generateInternHTMLStr(employee);
                 break;
             default:
-                throw new Error('Not an Employee Object');
+                throw new Error('Not a Manager / Engineer / Intern Object');
         }
     }
     htmlStr += `</div>
@@ -54,7 +52,7 @@ function generateHTMLStr(employees){
 }
 
 function generateManagerHTMLStr(manager){
-    return `<card class="card employee-card">
+    return `<card class="card employee-card" data-employee-type="manager">
     <div class="card-header">
         <h2 class="card-title">${manager.name}</h2>
         <h3 class="card-title">Manager</h3>
@@ -71,7 +69,7 @@ function generateManagerHTMLStr(manager){
 }
 
 function generateInternHTMLStr(intern){
-    return `<card class="card employee-card">
+    return `<card class="card employee-card" data-employee-type="intern">
     <div class="card-header">
         <h2 class="card-title">${intern.name}</h2>
         <h3 class="card-title">Intern</h3>
@@ -88,7 +86,7 @@ function generateInternHTMLStr(intern){
 }
 
 function generateEngineerHTMLStr(engineer){
-    return `<card class="card employee-card">
+    return `<card class="card employee-card" data-employee-type="engineer">
     <div class="card-header">
         <h2 class="card-title">${engineer.name}</h2>
         <h3 class="card-title">Engineer</h3>
@@ -104,6 +102,6 @@ function generateEngineerHTMLStr(engineer){
 }
 
 
-module.exports = { writeHTMLFile };
+module.exports = { writeHTMLFile, generateHTMLStr, generateManagerHTMLStr, generateInternHTMLStr, generateEngineerHTMLStr };
 
 //can make helper functions for dealing with each kind of employee object (manager, engineer, intern)

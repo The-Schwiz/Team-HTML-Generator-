@@ -4,7 +4,7 @@ const Engineer = require("./Assets/lib/engineer.js");
 const Intern = require("./Assets/lib/intern");
 const Employee = require("./Assets/lib/employee");
 const Manager = require("./Assets/lib/manager");
-const { writeHTMLFile } = require("./Assets/lib/generatehtml");
+const { writeHTMLFile } = require("./Assets/lib/generateHtml");
 
 // main manager function 
 //inside function you have helper functions to add team members
@@ -39,13 +39,11 @@ const main = async () => {
                 // TODO: add engineer
                 const engineer = await Engineer.createEngineer();
                 employees.push(engineer);
-                console.log('add engineer');
                 break;
             case 'Intern':
                 // TODO: add intern
                 const intern = await Intern.createIntern();
                 employees.push(intern);
-                console.log('add intern');
                 break;
             default:
                 isAddingEmployees = false;
@@ -57,8 +55,6 @@ const main = async () => {
     //after prompt is done, loop through each employee and create a string representing the employee as an html. 
     //use get role to identify type of employee and generate html accordinly 
     // call generate html function from lib folder
-    console.log(employees);
-    // TODO: generate html
     writeHTMLFile(employees);
 };
 main();
