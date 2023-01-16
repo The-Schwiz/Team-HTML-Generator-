@@ -2,6 +2,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const Employee = require("./employee");
 
+// extends the Employee class to create the Manager class
 class Manager extends Employee {
     constructor(name, id, email, officeNumber) {
         super(name, id, email);
@@ -12,6 +13,7 @@ class Manager extends Employee {
         return "Manager";
     }
 
+    // manager prompts the user for the Manager's name, id, email, and office number
     static async createManager() {
         const answers = await inquirer
           .prompt([

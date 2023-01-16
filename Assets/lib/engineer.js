@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const Employee = require("./employee");
 
+//extends the Employee class to create the Engineer class
 class Engineer extends Employee {
     constructor(name, id, email, github) {
         super(name, id, email);
@@ -12,7 +13,7 @@ class Engineer extends Employee {
     getRole() {
         return "Engineer";
     }
-
+// prompts the user for the Engineer's name, id, email, and github username
     static async createEngineer() {
         const answers = await inquirer
           .prompt([

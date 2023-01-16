@@ -2,6 +2,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const Employee = require("./employee");
 
+// extends the Employee class to create the Intern class
 class Intern extends Employee {
     constructor(name, id, email, school) {
         super(name, id, email);
@@ -13,7 +14,7 @@ class Intern extends Employee {
     getRole() {
         return "Intern";
     }
-
+// intern prompts the user for the Intern's name, id, email, and school
     static async createIntern() {
         const answers = await inquirer
           .prompt([

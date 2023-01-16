@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
+// sets up the Employee constructor class
 class Employee {
     constructor(name, id, email) {
       this.id = id;

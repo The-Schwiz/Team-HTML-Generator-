@@ -1,5 +1,6 @@
 const fs = require('fs');
 
+// write html file after collecting all employees
 function writeHTMLFile (employees){
     const htmlStr = generateHTMLStr(employees);
     fs.writeFile('index.html', htmlStr, (err) =>
@@ -51,6 +52,7 @@ function generateHTMLStr(employees){
     return htmlStr;
 }
 
+//generates html strings for each role 
 function generateManagerHTMLStr(manager){
     return `<card class="card employee-card" data-employee-type="manager">
     <div class="card-header">
